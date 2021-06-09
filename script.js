@@ -4,10 +4,12 @@ inputNewBook.addEventListener("click", e => {
     inputNewBook.disabled = true;
     const form = document.querySelector("#newBookForm")
     form.style.visibility = "visible";
-    
-    const title = document.createElement("p");
-    title.textContent = "Title";
-    const author = document.createElement("p");
+});
+
+const form = document.querySelector("#newBookForm")
+const title = document.createElement("p");
+title.textContent = "Title";
+const author = document.createElement("p");
     author.textContent = "Author"
     const pages = document.createElement("p");
     pages.textContent = "Pages";
@@ -54,9 +56,6 @@ inputNewBook.addEventListener("click", e => {
     form.append(notRead);
     form.appendChild(inputIsNotRead);
 
-});
-
-let form = document.querySelector("#newBookForm");
 form.addEventListener("submit", handleForm);
 function handleForm(event){ 
     event.preventDefault(); 
@@ -83,6 +82,10 @@ function Book(title, author, pages, isRead){
 }
 Book.prototype.info = function(){ 
     return `${this.title} by ${this.author}, ${this.pages} pages, ${this.sentenceEnd}`;
+}
+Book.prototype.toggleIsRead = function(){
+    this.isRead = (this.isRead == 0)? 1 : 0;
+    this.sentenceEnd = (this.isRead)? "read already" : "not read yet"
 }
 
 function displayLibrary(){
@@ -145,6 +148,9 @@ function submitForm(){
 const hobbit = new Book("The Hobbit", "J.R.R Tolkien", 295, false);
 const book2 = new Book("Shinegki no Kyojin", "Hajime Isayama", 100 ,true);
 const book3 = new Book("Looking for Alaska", "John Green", 100 ,true);
+book3.toggleIsRead();
+
+
 addBookToLibrary(hobbit);
 addBookToLibrary(book2);
 addBookToLibrary(book3);
